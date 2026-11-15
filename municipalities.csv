@@ -1,21 +1,20 @@
 municipality,station,station_zone,route_zone_count
-Winterthur,Winterthur,120,
-Uster,Uster,131,
-Dübendorf,Dübendorf,121,
-Wallisellen,Wallisellen,121,
-Dietikon,Dietikon,154,
-Schlieren,Schlieren,154,
-Kloten,Kloten,121,
-Bülach,Bülach,112,
-Wädenswil,Wädenswil,152,
-Horgen,Horgen,151,
-Meilen,Meilen,141,
-Thalwil,Thalwil,150,
-Adliswil,Adliswil,150,
-Regensdorf,Regensdorf-Watt,111,
-Wetzikon,Wetzikon ZH,132,
-Opfikon,Glattbrugg,121,
-Rüti ZH,Rüti ZH,134,
-Stäfa,Stäfa,143,
-Illnau-Effretikon,Effretikon,122,
-Bassersdorf,Bassersdorf,121,
+Winterthur,Winterthur,120,6
+Uster,Uster,131,5
+Dübendorf,Dübendorf,121,3
+Wallisellen,Wallisellen,121,3
+Dietikon,Dietikon,154,3
+Schlieren,Schlieren,154,3
+Kloten,Kloten,121,3
+Bülach,Bülach,112,4
+Wädenswil,Wädenswil,152,5
+Horgen,Horgen,151,4
+Meilen,Meilen,141,4
+Thalwil,Thalwil,150,4
+Adliswil,Adliswil,150,3
+Regensdorf,Regensdorf-Watt,111,3
+Wetzikon,Wetzikon ZH,132,6
+Opfikon,Glattbrugg,121,3
+Stäfa,Stäfa,143,6
+Illnau-Effretikon,Effretikon,122,4
+Bassersdorf,Bassersdorf,121,3
