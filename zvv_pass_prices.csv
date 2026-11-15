@@ -1,0 +1,11 @@
+fare_level,fare_class,monthly_chf,annual_chf,valid_from,valid_until,source_url
+2,2,88,813,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
+3,2,130,1200,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
+4,2,171,1579,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
+5,2,210,1939,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
+6,2,250,2308,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
+2,1,144,1345,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
+3,1,212,1971,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
+4,1,283,2613,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
+5,1,347,3203,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
+6,1,413,3812,2025-12-14,2026-12-12,https://www.zvv.ch/de/abos-und-tickets/abos/monats-und-jahresabo.html
