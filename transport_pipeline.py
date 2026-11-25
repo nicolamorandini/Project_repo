@@ -1,11 +1,14 @@
 """Ermittle Pendelzeiten und ZVV-Abopreise fuer 1. und 2. Klasse.
 
+Dieses Skript laeuft in GitHub Codespaces (Cloud) und speichert keine
+Projektdaten auf deinem Mac. Es ermittelt Pfade ueber __file__, nicht Path.cwd().
 Alle Dateien liegen DIREKT im Hauptverzeichnis des GitHub-Repositories.
 Die CSV-Dateien koennen z. B. 'municapilites.csv' und 'zvv_passes.csv'
 heissen. Die Ergebnisse werden daneben in 'transport.db' gespeichert.
 """
 
 import csv  # Liest CSV-Tabellen wie municipalities.csv.
+import os  # Ermittelt, ob der Code in GitHub Codespaces laeuft.
 import sqlite3  # Erstellt und bearbeitet eine SQLite-Datenbank.
 import time  # Erlaubt kurze Pausen zwischen den API-Anfragen.
 from datetime import date, datetime, timedelta  # Arbeitet mit Datum und Uhrzeit.
@@ -29,6 +32,21 @@ MUNICIPALITY_NAMES = (
 PRICE_NAMES = (
     "zvv_passes.csv", "zvv_pass_prices.csv", "zvv_passes", "zvv_pass_prices",
 )
+
+
+
+def show_cloud_environment():
+    """Zeige die Arbeitsumgebung, ohne vertrauliche Zugangsdaten auszugeben.
+
+    Die Daten liegen im GitHub-Codespace. Sie sind erst nach Commit und Push
+    dauerhaft im gemeinsamen GitHub-Repository sichtbar.
+    """
+    cloud = os.environ.get("CODESPACES") == "true"  # Cloud-Kernel erkennen.
+    print("GitHub Codespaces:", "Ja" if cloud else "Nein (anderer Python-Kernel)")
+    print("GitHub-Repository:", os.environ.get("GITHUB_REPOSITORY", "nicht erkannt"))
+    print("Programmordner:", BASE_DIR)  # Ordner des Python-Skripts.
+    print("SQLite-Datenbank:", DB_FILE)  # Pfad der Cloud-Datei.
+    return cloud
 
 
 def find_existing_file(possible_names):
