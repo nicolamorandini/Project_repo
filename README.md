@@ -16,26 +16,74 @@ The planned app compares:
 The aim is to show how a cheaper apartment can become less attractive
 once transport costs and commuting time are considered.
 
-## Current status
+## Current status — real-data integration, 28 November 2026
 
-The project is under development.
+The app now reads 1,411 real Flatfox listings from `data/wohnungen.db`,
+uses Nicola's saved `model.joblib` for gross fair-rent predictions, and
+joins municipality transport data and tariff CSVs. It never reads
+`data/test_listings.csv` or inserts fictional listing/route values.
 
-The monthly cost functions and ranking calculation are implemented.
-The cost example runs, and all nine cost tests have passed locally
-with Python 3.9.6.
+The model predicts CHF/m²; `real_data.py` multiplies by living area.
+It reproduces the notebook's original training/test split to recover the
+training year median (2012) and held-out MAE (CHF 530.01). Training listings
+are labelled; their predictions are not independent valuations. The
+notebook/model/original training CSV must be updated together. Ideally,
+the ML owner should export a preprocessing pipeline and evaluation metadata.
 
-Transport data collection code and CSV input files are included.
-The cost calculation still needs to be connected to the real data
-and the Streamlit interface.
+Public transport ranking excludes listings without a matching route or
+currently valid tariff. The supplied municipality list does not cover all
+listing locations (including Zürich itself). Locations are matched exactly;
+we do not invent zones or map neighbourhoods to municipalities automatically.
+Travel times are station-to-HB, not apartment-to-office. Timetable dates
+are displayed. Refresh transport data as needed; listings are snapshots.
 
-The complete app is not yet runnable: app.py is currently a placeholder.
-Apartment data collection and the fair-rent model are separate workstreams.
+Bike/car route columns are read when available. Motorbike routes, missing
+bike/car routes and vehicle ownership costs must be entered by the user.
+There are no fictional vehicle price defaults. Full vehicle ownership costs
+include depreciation, so they must not be described as cash bills.
+
+### Run the integrated app
+
+Use Python 3.12. The saved scikit-learn 1.9.0 model needs a newer environment
+than the original Python 3.9 cost demo. Do not reuse that old environment.
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
+```
+
+A Python 3.12 environment is already prepared in Jordi's `integrated_project`
+folder. From that folder, run `.venv/bin/python -m streamlit run app.py`.
+
+### Refresh public transport data
+
+```bash
+python -c "from transport_pipeline import build_pt_database, update_pass_prices; build_pt_database(); update_pass_prices()"
+```
+
+Internet access is required. Route failures remain missing. Tariffs come
+from the team's CSV, with its source URLs and validity dates; updating the
+route database does not fetch newer tariffs automatically.
+
+### Validate
+
+```bash
+python -m unittest -v test_costs test_real_data
+```
+
+Integration checks cover the actual listing/model snapshot, notebook MAE,
+missing routes, expired prices, annual pass conversion and Streamlit mode changes.
 
 ## Repository files
 
 | File | Purpose |
 | --- | --- |
-| app.py | Placeholder for the future Streamlit app |
+| app.py | Real listing filters, public transport ranking and vehicle cost details |
+| real_data.py | SQLite, ML preprocessing/predictions and transport joins |
+| requirements.txt | Tested dependencies for Python 3.12 |
+| transport.db | Collected route-time snapshot |
 | costs.py | Monthly cost, hourly time value and ranking functions |
 | example.py | Demonstrates the calculations with fictional inputs |
 | test_costs.py | Nine automated checks for the cost functions |
@@ -136,7 +184,7 @@ Actual and predicted rents must use the same basis: both including
 charges or both excluding charges. The user's rent budget should be
 applied before ranking.
 
-The fair-rent prediction will come from the ML workstream.
+Fair-rent predictions use the saved model from the ML workstream.
 
 ## Transport workflow
 
@@ -164,7 +212,7 @@ cost-module tests.
 
 ## Data sources and limitations
 
-Planned project sources:
+Project sources:
 - Flatfox public API for apartment listings.
 - transport.opendata.ch for public transport travel times.
 - Official ZVV/SBB information for transport tariffs.
