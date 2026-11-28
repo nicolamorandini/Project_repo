@@ -1,0 +1,7 @@
+# Python 3.12 recommended. Match the saved model's scikit-learn version.
+streamlit==1.67.0
+pandas==3.1.1
+scikit-learn==1.9.0
+joblib==1.6.0
+requests==2.34.2
+numpy==2.5.5
